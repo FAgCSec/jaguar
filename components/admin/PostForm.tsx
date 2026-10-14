@@ -1,4 +1,5 @@
 import { CATEGORIAS_NOTICIAS } from "@/lib/constants";
+import { Eye } from "lucide-react";
 import type { Post } from "@/types";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImageUploader } from "./Uploaders";
@@ -99,9 +100,9 @@ export function PostForm({
             href={`/${tipo === "columna" ? "columnas" : "noticias"}/${post.slug}?vista-previa=1`}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-bold text-[#2E7D32] hover:underline"
+            className="inline-flex items-center gap-1 font-bold text-[#2E7D32] hover:underline"
           >
-            👁 Vista previa
+            <Eye size={16} /> Vista previa
           </a>
         )}
       </div>

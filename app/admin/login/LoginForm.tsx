@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { Sprout } from "lucide-react";
 import { loginAdmin } from "./actions";
 
 export function LoginForm() {
@@ -8,7 +9,7 @@ export function LoginForm() {
   return (
     <form action={action} className="grid gap-4 rounded-3xl bg-white p-8 shadow-xl">
       <div className="text-center">
-        <p aria-hidden="true" className="text-4xl">🌱</p>
+        <Sprout aria-hidden="true" size={36} className="mx-auto text-[#2E7D32]" />
         <h1 className="mt-2 text-xl font-extrabold text-[#1B5E20]">Acceso del equipo</h1>
         <p className="text-sm text-[#1A1A1A]/70">
           Solo administradores (1-2 cuentas). Activa 2FA en Supabase para mayor seguridad.

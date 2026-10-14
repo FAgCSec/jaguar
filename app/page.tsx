@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArrowRight, Sprout } from "lucide-react";
 import { Hero } from "@/components/public/Hero";
 import { StatsBar } from "@/components/public/StatsBar";
 import { NewsCard } from "@/components/public/NewsCard";
@@ -81,8 +82,8 @@ export default async function Home() {
             <h2 id="columnas-h" className="text-2xl font-extrabold text-[#1B5E20] sm:text-3xl">
               Columnas de opinión
             </h2>
-            <Link href="/columnas" className="shrink-0 font-bold text-[#2E7D32] hover:underline">
-              Ver todas →
+            <Link href="/columnas" className="inline-flex shrink-0 items-center gap-1 font-bold text-[#2E7D32] hover:underline">
+              Ver todas <ArrowRight size={16} />
             </Link>
           </div>
           <DivisorHojas />
@@ -122,8 +123,8 @@ export default async function Home() {
             <h2 id="gal-h" className="text-2xl font-extrabold text-[#1B5E20] sm:text-3xl">
               Galería de campaña
             </h2>
-            <Link href="/galeria" className="shrink-0 font-bold text-[#2E7D32] hover:underline">
-              Ver galería →
+            <Link href="/galeria" className="inline-flex shrink-0 items-center gap-1 font-bold text-[#2E7D32] hover:underline">
+              Ver galería <ArrowRight size={16} />
             </Link>
           </div>
           <DivisorHojas />
@@ -147,9 +148,10 @@ export default async function Home() {
             <h2 id="contacto-h" className="text-2xl font-extrabold sm:text-3xl">
               Súmate como voluntario
             </h2>
-            <p className="mt-2 text-white/85">
+            <p className="mt-2 flex items-start gap-2 text-white/85">
+              <Sprout size={20} className="mt-0.5 shrink-0 text-[#D4E157]" />
               Déjanos tus datos y te contactamos por WhatsApp. Cada mano cuenta
-              para que {SITE.departamento} florezca. 🌱
+              para que {SITE.departamento} florezca.
             </p>
           </div>
           <ContactForm />

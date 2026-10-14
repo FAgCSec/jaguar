@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FileText } from "lucide-react";
 import { ProposalSection } from "@/components/public/ProposalSection";
 import { getPropuestas } from "@/lib/data";
 
@@ -19,8 +20,9 @@ export default async function PropuestasPage() {
         {grupos.length ? (
           <ProposalSection grupos={grupos} pdfUrl={pdfUrl} />
         ) : (
-          <p className="rounded-2xl bg-white p-8 text-center shadow">
-            Estamos publicando el plan de gobierno. Vuelve pronto. 📄
+          <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center shadow">
+            <FileText size={20} className="shrink-0 text-[#2E7D32]" />
+            Estamos publicando el plan de gobierno. Vuelve pronto.
           </p>
         )}
       </div>

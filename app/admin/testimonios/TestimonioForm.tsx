@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import { ImageUploader } from "@/components/admin/Uploaders";
 import { guardarTestimonio } from "../gestion-actions";
 import type { Testimonial } from "@/types";
@@ -16,8 +17,8 @@ export function TestimonioForm({ inicial }: { inicial?: Testimonial | null }) {
   }
   if (!abierto) {
     return (
-      <button type="button" onClick={() => setAbierto(true)} className="rounded-full bg-[#C6D92E] px-5 py-2.5 font-bold text-[#1B5E20]">
-        ➕ Nuevo testimonio
+      <button type="button" onClick={() => setAbierto(true)} className="inline-flex items-center gap-1.5 rounded-full bg-[#C6D92E] px-5 py-2.5 font-bold text-[#1B5E20]">
+        <Plus size={17} /> Nuevo testimonio
       </button>
     );
   }

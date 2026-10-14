@@ -33,7 +33,12 @@ export async function loginAdmin(
   if (error) {
     const n = (reg && reg.hasta > ahora ? reg.n : 0) + 1;
     intentos.set(key, { n, hasta: ahora + VENTANA_MS });
-    return { error: "Credenciales incorrectas. Intento " + n + " de " + MAX_INTENTOS + "." };
+    // Mensaje real de Supabase para diagnosticar (sin exponer datos sensibles).
+    const detalle =
+      error.message === "Invalid login credentials"
+        ? "Correo o contraseña incorrectos, o el correo no está confirmado."
+        : error.message;
+    return { error: `No se pudo entrar (${detalle}). Intento ${n} de ${MAX_INTENTOS}.` };
   }
   intentos.delete(key);
   redirect("/admin");

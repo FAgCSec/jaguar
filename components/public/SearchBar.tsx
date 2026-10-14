@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 import { CATEGORIAS_NOTICIAS } from "@/lib/constants";
 
 export function SearchBar({ mostrarTipo = false }: { mostrarTipo?: boolean }) {
@@ -23,7 +24,7 @@ export function SearchBar({ mostrarTipo = false }: { mostrarTipo?: boolean }) {
       onSubmit={(e) => e.preventDefault()}
     >
       <label className="flex flex-1 items-center gap-2 rounded-full bg-[#F5F5ED] px-4 py-2.5 ring-1 ring-[#2E7D32]/15">
-        <span aria-hidden="true">🔍</span>
+        <Search aria-hidden="true" size={17} className="shrink-0 text-[#2E7D32]" />
         <span className="sr-only">Buscar por texto</span>
         <input
           type="search"

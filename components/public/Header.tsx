@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -61,7 +62,7 @@ export function Header() {
             aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
             className="rounded-lg p-2 hover:bg-white/10 lg:hidden"
           >
-            {abierto ? "✕" : "☰"}
+            {abierto ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>

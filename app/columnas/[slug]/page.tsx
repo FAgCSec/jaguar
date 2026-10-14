@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { ArrowLeft } from "lucide-react";
 import { getPostBySlug } from "@/lib/data";
 import { limpiarHtml } from "@/lib/sanitize";
 import { SITE } from "@/lib/constants";
@@ -40,8 +41,8 @@ export default async function ColumnaDetalle({
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <Link href="/columnas" className="text-sm font-bold text-[#2E7D32] hover:underline">
-        ← Volver a columnas
+      <Link href="/columnas" className="inline-flex items-center gap-1 text-sm font-bold text-[#2E7D32] hover:underline">
+        <ArrowLeft size={15} /> Volver a columnas
       </Link>
       <p className="mt-4 text-xs font-bold uppercase tracking-widest text-[#2E7D32]">
         Columna de opinión · {fechaCorta(post.published_at ?? post.created_at)}

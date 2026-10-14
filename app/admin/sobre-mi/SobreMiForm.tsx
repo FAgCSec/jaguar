@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CircleCheck } from "lucide-react";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImageUploader } from "@/components/admin/Uploaders";
 import { guardarConfig } from "../gestion-actions";
@@ -50,7 +51,7 @@ export function SobreMiForm({
       <button type="submit" className="w-fit rounded-full bg-[#1B5E20] px-6 py-2.5 font-bold text-white hover:bg-[#2E7D32]">
         Guardar cambios
       </button>
-      {ok && <p role="status" className="text-sm font-semibold text-[#1B5E20]">✅ Guardado.</p>}
+      {ok && <p role="status" className="flex items-center gap-1.5 text-sm font-semibold text-[#1B5E20]"><CircleCheck size={16} /> Guardado.</p>}
     </form>
   );
 }

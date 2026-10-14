@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CircleAlert, CircleCheck, Hand } from "lucide-react";
 import { enviarMensaje } from "@/app/contacto/actions";
 
 export function ContactForm() {
@@ -94,18 +95,20 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={cargando}
-        className="rounded-full bg-[#C6D92E] px-6 py-3 font-bold text-[#1B5E20] shadow transition hover:bg-[#D4E157] disabled:opacity-60"
+        className="flex items-center justify-center gap-2 rounded-full bg-[#C6D92E] px-6 py-3 font-bold text-[#1B5E20] shadow transition hover:bg-[#D4E157] disabled:opacity-60"
       >
-        {cargando ? "Enviando…" : "Quiero ser voluntario ✋"}
+        {cargando ? "Enviando…" : (<>Quiero ser voluntario <Hand size={18} /></>)}
       </button>
       {estado === "ok" && (
-        <p role="status" className="rounded-xl bg-[#f1f8e9] p-3 text-sm font-semibold text-[#1B5E20]">
-          ✅ ¡Gracias! Recibimos tu mensaje y pronto te contactaremos por WhatsApp.
+        <p role="status" className="flex items-start gap-2 rounded-xl bg-[#f1f8e9] p-3 text-sm font-semibold text-[#1B5E20]">
+          <CircleCheck size={18} className="mt-0.5 shrink-0" />
+          ¡Gracias! Recibimos tu mensaje y pronto te contactaremos por WhatsApp.
         </p>
       )}
       {estado === "error" && (
-        <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-700">
-          ⚠️ No pudimos enviar tu mensaje. Intenta de nuevo o escríbenos por WhatsApp.
+        <p role="alert" className="flex items-start gap-2 rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-700">
+          <CircleAlert size={18} className="mt-0.5 shrink-0" />
+          No pudimos enviar tu mensaje. Intenta de nuevo o escríbenos por WhatsApp.
         </p>
       )}
     </form>

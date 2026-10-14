@@ -1,6 +1,7 @@
 import { requireAdmin } from "../layout";
 import { eliminarFoto, reordenarFoto } from "../gestion-actions";
 import { NuevaFotoForm } from "./NuevaFotoForm";
+import { ArrowDown, ArrowUp, Camera, X } from "lucide-react";
 import type { GalleryImage } from "@/types";
 
 export default async function AdminGaleria() {
@@ -23,19 +24,19 @@ export default async function AdminGaleria() {
             </div>
             <div className="flex gap-1">
               <form action={reordenarFoto.bind(null, f.id, "up")}>
-                <button type="submit" aria-label="Subir orden" className="rounded-lg bg-[#F5F5ED] px-2 py-1 font-bold">↑</button>
+                <button type="submit" aria-label="Subir orden" className="rounded-lg bg-[#F5F5ED] p-1.5"><ArrowUp size={16} /></button>
               </form>
               <form action={reordenarFoto.bind(null, f.id, "down")}>
-                <button type="submit" aria-label="Bajar orden" className="rounded-lg bg-[#F5F5ED] px-2 py-1 font-bold">↓</button>
+                <button type="submit" aria-label="Bajar orden" className="rounded-lg bg-[#F5F5ED] p-1.5"><ArrowDown size={16} /></button>
               </form>
               <form action={eliminarFoto.bind(null, f.id)}>
-                <button type="submit" aria-label="Eliminar" className="rounded-lg bg-red-50 px-2 py-1 font-bold text-red-700" onClick={(e) => { if (!confirm("¿Eliminar esta foto?")) e.preventDefault(); }}>✕</button>
+                <button type="submit" aria-label="Eliminar" className="rounded-lg bg-red-50 p-1.5 text-red-700" onClick={(e) => { if (!confirm("¿Eliminar esta foto?")) e.preventDefault(); }}><X size={16} /></button>
               </form>
             </div>
           </li>
         ))}
       </ul>
-      {!fotos.length && <p className="rounded-2xl bg-white p-8 text-center shadow">Sube la primera foto de campaña. 📸</p>}
+      {!fotos.length && <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center shadow"><Camera size={20} className="text-[#2E7D32]" /> Sube la primera foto de campaña.</p>}
     </main>
   );
 }

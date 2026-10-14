@@ -1,6 +1,19 @@
 "use client";
 
 import { useRef, useState } from "react";
+import {
+  Bold,
+  Heading2,
+  Heading3,
+  ImagePlus,
+  Italic,
+  Link2,
+  List,
+  ListOrdered,
+  MonitorPlay,
+  Pilcrow,
+  Quote,
+} from "lucide-react";
 import { youtubeId } from "@/lib/utils";
 
 /**
@@ -59,22 +72,24 @@ export function RichTextEditor({
     setHtml(ref.current?.innerHTML ?? "");
   }
 
-  const btn = "rounded-lg bg-[#F5F5ED] px-2.5 py-1.5 text-sm font-bold hover:bg-[#C6D92E]";
+  const btn =
+    "flex items-center rounded-lg bg-[#F5F5ED] px-2.5 py-1.5 text-sm font-bold hover:bg-[#C6D92E]";
+  const iconProps = { size: 16 } as const;
 
   return (
     <div>
       <div className="mb-2 flex flex-wrap gap-1.5" role="toolbar" aria-label="Formato de texto">
-        <button type="button" className={btn} onClick={() => cmd("bold")} title="Negrita"><b>N</b></button>
-        <button type="button" className={btn} onClick={() => cmd("italic")} title="Cursiva"><i>K</i></button>
-        <button type="button" className={btn} onClick={() => cmd("formatBlock", "h2")} title="Título">H2</button>
-        <button type="button" className={btn} onClick={() => cmd("formatBlock", "h3")} title="Subtítulo">H3</button>
-        <button type="button" className={btn} onClick={() => cmd("formatBlock", "p")} title="Párrafo">¶</button>
-        <button type="button" className={btn} onClick={() => cmd("insertUnorderedList")} title="Lista">• Lista</button>
-        <button type="button" className={btn} onClick={() => cmd("insertOrderedList")} title="Numerada">1. Lista</button>
-        <button type="button" className={btn} onClick={() => cmd("formatBlock", "blockquote")} title="Cita">❝ Cita</button>
-        <button type="button" className={btn} onClick={insertarEnlace} title="Enlace">🔗</button>
-        <button type="button" className={btn} onClick={insertarImagen} title="Imagen">🖼️</button>
-        <button type="button" className={btn} onClick={insertarYoutube} title="Video de YouTube">▶️ YouTube</button>
+        <button type="button" className={btn} onClick={() => cmd("bold")} title="Negrita" aria-label="Negrita"><Bold {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("italic")} title="Cursiva" aria-label="Cursiva"><Italic {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("formatBlock", "h2")} title="Título" aria-label="Título"><Heading2 {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("formatBlock", "h3")} title="Subtítulo" aria-label="Subtítulo"><Heading3 {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("formatBlock", "p")} title="Párrafo" aria-label="Párrafo"><Pilcrow {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("insertUnorderedList")} title="Lista" aria-label="Lista"><List {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("insertOrderedList")} title="Lista numerada" aria-label="Lista numerada"><ListOrdered {...iconProps} /></button>
+        <button type="button" className={btn} onClick={() => cmd("formatBlock", "blockquote")} title="Cita" aria-label="Cita"><Quote {...iconProps} /></button>
+        <button type="button" className={btn} onClick={insertarEnlace} title="Enlace" aria-label="Enlace"><Link2 {...iconProps} /></button>
+        <button type="button" className={btn} onClick={insertarImagen} title="Imagen" aria-label="Imagen"><ImagePlus {...iconProps} /></button>
+        <button type="button" className={btn} onClick={insertarYoutube} title="Video de YouTube" aria-label="Video de YouTube"><MonitorPlay {...iconProps} /></button>
       </div>
       <div
         ref={ref}

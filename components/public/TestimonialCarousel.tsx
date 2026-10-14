@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import type { Testimonial } from "@/types";
 
 export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
@@ -11,7 +12,7 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
 
   return (
     <div className="mx-auto max-w-3xl rounded-3xl bg-[#1B5E20] p-6 text-white shadow-xl sm:p-10">
-      <p aria-hidden="true" className="text-4xl text-[#C6D92E]">“</p>
+      <Quote aria-hidden="true" size={36} className="text-[#C6D92E]" />
       <blockquote key={actual.id} className="min-h-24 text-lg italic leading-relaxed sm:text-xl">
         {actual.texto}
       </blockquote>
@@ -49,17 +50,17 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
             type="button"
             onClick={() => setIndice((i) => (i - 1 + items.length) % items.length)}
             aria-label="Testimonio anterior"
-            className="rounded-full bg-white/10 px-4 py-2 font-bold hover:bg-[#C6D92E] hover:text-[#1B5E20]"
+            className="rounded-full bg-white/10 p-2.5 hover:bg-[#C6D92E] hover:text-[#1B5E20]"
           >
-            ←
+            <ChevronLeft size={20} />
           </button>
           <button
             type="button"
             onClick={() => setIndice((i) => (i + 1) % items.length)}
             aria-label="Testimonio siguiente"
-            className="rounded-full bg-white/10 px-4 py-2 font-bold hover:bg-[#C6D92E] hover:text-[#1B5E20]"
+            className="rounded-full bg-white/10 p-2.5 hover:bg-[#C6D92E] hover:text-[#1B5E20]"
           >
-            →
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>

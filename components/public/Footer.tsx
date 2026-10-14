@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
 export function Footer() {
@@ -30,10 +31,10 @@ export function Footer() {
           <p className="text-sm font-bold uppercase tracking-wide text-[#D4E157]">
             Contacto y redes
           </p>
-          <ul className="mt-3 space-y-1 text-sm text-white/85">
-            <li>📧 {SITE.email}</li>
-            <li>📱 {SITE.telefonoMostrado}</li>
-            <li>📍 {SITE.direccion}</li>
+          <ul className="mt-3 space-y-1.5 text-sm text-white/85">
+            <li className="flex items-center gap-2"><Mail size={15} className="shrink-0 text-[#D4E157]" /> {SITE.email}</li>
+            <li className="flex items-center gap-2"><Phone size={15} className="shrink-0 text-[#D4E157]" /> {SITE.telefonoMostrado}</li>
+            <li className="flex items-center gap-2"><MapPin size={15} className="shrink-0 text-[#D4E157]" /> {SITE.direccion}</li>
           </ul>
           <div className="mt-3 flex flex-wrap gap-2">
             {[

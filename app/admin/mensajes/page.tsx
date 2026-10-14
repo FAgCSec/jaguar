@@ -1,5 +1,6 @@
 import { requireAdmin } from "../layout";
 import { eliminarMensaje, marcarLeido } from "../gestion-actions";
+import { Inbox, Mail, MapPin, MessageCircle, Phone, Trash2 } from "lucide-react";
 import type { ContactMessage } from "@/types";
 
 export default async function AdminMensajes({
@@ -33,10 +34,10 @@ export default async function AdminMensajes({
                 {new Date(m.created_at).toLocaleString("es-CO", { timeZone: "America/Bogota" })}
               </time>
             </div>
-            <p className="mt-1 text-sm">
-              📱 {m.whatsapp ?? "—"}
-              {m.email ? ` · 📧 ${m.email}` : ""}
-              {m.municipio ? ` · 📍 ${m.municipio}` : ""}
+            <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <span className="inline-flex items-center gap-1"><Phone size={14} className="text-[#2E7D32]" /> {m.whatsapp ?? "—"}</span>
+              {m.email ? (<span className="inline-flex items-center gap-1"><Mail size={14} className="text-[#2E7D32]" /> {m.email}</span>) : ""}
+              {m.municipio ? (<span className="inline-flex items-center gap-1"><MapPin size={14} className="text-[#2E7D32]" /> {m.municipio}</span>) : ""}
             </p>
             <p className="mt-2 rounded-xl bg-white/70 p-3 text-sm">{m.mensaje}</p>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -45,9 +46,9 @@ export default async function AdminMensajes({
                   href={`https://wa.me/57${m.whatsapp.replace(/\D/g, "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#2E7D32] px-4 py-1.5 text-sm font-bold text-white"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#2E7D32] px-4 py-1.5 text-sm font-bold text-white"
                 >
-                  Responder por WhatsApp
+                  <MessageCircle size={15} /> Responder por WhatsApp
                 </a>
               )}
               <form action={marcarLeido.bind(null, m.id, !m.leido)}>
@@ -56,14 +57,14 @@ export default async function AdminMensajes({
                 </button>
               </form>
               <form action={eliminarMensaje.bind(null, m.id)}>
-                <button type="submit" className="rounded-full bg-red-50 px-4 py-1.5 text-sm font-bold text-red-700" onClick={(e) => { if (!confirm("¿Eliminar este mensaje?")) e.preventDefault(); }}>
-                  Eliminar
+                <button type="submit" className="inline-flex items-center gap-1 rounded-full bg-red-50 px-4 py-1.5 text-sm font-bold text-red-700" onClick={(e) => { if (!confirm("¿Eliminar este mensaje?")) e.preventDefault(); }}>
+                  <Trash2 size={14} /> Eliminar
                 </button>
               </form>
             </div>
           </li>
         ))}
-        {!mensajes.length && <p className="rounded-2xl bg-white p-8 text-center shadow">No hay mensajes. ✉️</p>}
+        {!mensajes.length && <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center shadow"><Inbox size={20} className="text-[#2E7D32]" /> No hay mensajes.</p>}
       </ul>
     </main>
   );

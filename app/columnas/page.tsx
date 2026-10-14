@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PenLine } from "lucide-react";
 import { NewsCard } from "@/components/public/NewsCard";
 import { SearchBar } from "@/components/public/SearchBar";
 import { buscarPosts } from "@/lib/data";
@@ -34,8 +35,9 @@ export default async function ColumnasPage({
           ))}
         </div>
       ) : (
-        <p className="mt-6 rounded-2xl bg-white p-8 text-center shadow">
-          No encontramos columnas con esos filtros. ✍️
+        <p className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center shadow">
+          <PenLine size={20} className="shrink-0 text-[#2E7D32]" />
+          No encontramos columnas con esos filtros.
         </p>
       )}
     </main>

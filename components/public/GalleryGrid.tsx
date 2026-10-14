@@ -1,11 +1,13 @@
 import Image from "next/image";
+import { Sprout } from "lucide-react";
 import type { GalleryImage } from "@/types";
 
 export function GalleryGrid({ imagenes }: { imagenes: GalleryImage[] }) {
   if (!imagenes.length) {
     return (
-      <p className="rounded-2xl bg-white p-8 text-center text-[#1A1A1A]/70 shadow">
-        Muy pronto publicaremos fotos de la campaña. 🌱
+      <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center text-[#1A1A1A]/70 shadow">
+        <Sprout size={20} className="text-[#2E7D32]" />
+        Muy pronto publicaremos fotos de la campaña.
       </p>
     );
   }

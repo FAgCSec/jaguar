@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ImagePlus } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { validarArchivo } from "@/lib/utils";
 
@@ -64,8 +65,8 @@ export function ImageUploader({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={url} alt="Vista previa" className="h-24 w-32 rounded-xl object-cover shadow" />
         ) : (
-          <span className="flex h-24 w-32 items-center justify-center rounded-xl bg-[#F5F5ED] text-3xl">
-            🖼️
+          <span className="flex h-24 w-32 items-center justify-center rounded-xl bg-[#F5F5ED] text-[#2E7D32]/50">
+            <ImagePlus size={32} />
           </span>
         )}
         <label className="cursor-pointer rounded-full bg-[#1B5E20] px-4 py-2 text-sm font-bold text-white hover:bg-[#2E7D32]">

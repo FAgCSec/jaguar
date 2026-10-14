@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { ArrowLeft } from "lucide-react";
 import { NewsCard } from "@/components/public/NewsCard";
 import { buscarPosts, getPostBySlug } from "@/lib/data";
 import { limpiarHtml } from "@/lib/sanitize";
@@ -44,8 +45,8 @@ export default async function NoticiaDetalle({
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <Link href="/noticias" className="text-sm font-bold text-[#2E7D32] hover:underline">
-        ← Volver a noticias
+      <Link href="/noticias" className="inline-flex items-center gap-1 text-sm font-bold text-[#2E7D32] hover:underline">
+        <ArrowLeft size={15} /> Volver a noticias
       </Link>
       <p className="mt-4 flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wide">
         {post.categoria && (

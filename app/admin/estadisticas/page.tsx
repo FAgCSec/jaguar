@@ -25,11 +25,11 @@ export default async function AdminStats() {
         <label className="grid gap-1 text-sm font-semibold">
           Icono
           <select name="icono" className="rounded-xl bg-[#F5F5ED] px-4 py-2.5 font-normal outline-none ring-1 ring-[#2E7D32]/15">
-            <option value="">🌱 (auto)</option>
-            <option value="map">🗺️ map</option>
-            <option value="doc">📄 doc</option>
-            <option value="users">🤝 users</option>
-            <option value="leaf">🌿 leaf</option>
+            <option value="">Automático</option>
+            <option value="map">Mapa</option>
+            <option value="doc">Documento</option>
+            <option value="users">Personas</option>
+            <option value="leaf">Hoja</option>
           </select>
         </label>
         <label className="grid gap-1 text-sm font-semibold">

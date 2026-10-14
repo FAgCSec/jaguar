@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Leaf } from "lucide-react";
 import { fechaCorta } from "@/lib/utils";
 import type { Post } from "@/types";
 
@@ -18,8 +19,8 @@ export function NewsCard({ post }: { post: Post }) {
             className="object-cover"
           />
         ) : (
-          <span aria-hidden="true" className="flex h-full items-center justify-center text-5xl">
-            🌿
+          <span aria-hidden="true" className="flex h-full items-center justify-center text-[#2E7D32]/40">
+            <Leaf size={56} />
           </span>
         )}
         {post.categoria && (
@@ -44,7 +45,7 @@ export function NewsCard({ post }: { post: Post }) {
           href={`${base}/${post.slug}`}
           className="mt-auto inline-flex w-fit items-center gap-1 pt-2 text-sm font-bold text-[#2E7D32] hover:underline"
         >
-          Leer más →
+          Leer más <ArrowRight size={15} />
         </Link>
       </div>
     </article>

@@ -1,3 +1,4 @@
+import { FileDown, Sprout } from "lucide-react";
 import type { ProposalGroup } from "@/types";
 
 export function ProposalSection({
@@ -16,8 +17,8 @@ export function ProposalSection({
           className="group rounded-2xl bg-white p-5 shadow-md ring-1 ring-[#2E7D32]/10"
         >
           <summary className="cursor-pointer list-none text-lg font-bold text-[#1B5E20] [&::-webkit-details-marker]:hidden">
-            <span className="mr-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#C6D92E] text-[#1B5E20]">
-              🌱
+            <span className="mr-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#C6D92E] align-middle text-[#1B5E20]">
+              <Sprout size={18} />
             </span>
             {g.tema}
           </summary>
@@ -40,7 +41,8 @@ export function ProposalSection({
           rel="noopener noreferrer"
           className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-[#1B5E20] px-6 py-3 font-bold text-white shadow hover:bg-[#2E7D32]"
         >
-          📄 Descargar plan de gobierno completo (PDF)
+          <FileDown size={18} />
+          Descargar plan de gobierno completo (PDF)
         </a>
       )}
     </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/public/ContactForm";
 import { SITE } from "@/lib/constants";
 
@@ -20,13 +21,13 @@ export default function ContactoPage() {
             rel="noopener noreferrer"
             className="rounded-2xl bg-[#2E7D32] p-5 font-bold text-white shadow hover:bg-[#1B5E20]"
           >
-            💬 Escríbenos por WhatsApp
+            <span className="flex items-center gap-2"><MessageCircle size={20} /> Escríbenos por WhatsApp</span>
             <span className="block text-sm font-normal text-white/85">{SITE.telefonoMostrado}</span>
           </a>
           <div className="rounded-2xl bg-white p-5 shadow">
             <p className="font-bold text-[#1B5E20]">Sede de campaña</p>
-            <p className="mt-1 text-sm">📍 {SITE.direccion}</p>
-            <p className="mt-1 text-sm">📧 {SITE.email}</p>
+            <p className="mt-1 flex items-center gap-2 text-sm"><MapPin size={15} className="shrink-0 text-[#2E7D32]" /> {SITE.direccion}</p>
+            <p className="mt-1 flex items-center gap-2 text-sm"><Mail size={15} className="shrink-0 text-[#2E7D32]" /> {SITE.email}</p>
           </div>
         </div>
         <ContactForm />

@@ -1,6 +1,7 @@
 import { requireAdmin } from "../layout";
 import { eliminarTestimonio } from "../gestion-actions";
 import { TestimonioForm } from "./TestimonioForm";
+import { Trash2 } from "lucide-react";
 import type { Testimonial } from "@/types";
 
 export default async function AdminTestimonios() {
@@ -20,8 +21,8 @@ export default async function AdminTestimonios() {
             <div className="mt-2 flex gap-2">
               <TestimonioForm inicial={t} />
               <form action={eliminarTestimonio.bind(null, t.id)}>
-                <button type="submit" className="rounded-full bg-red-50 px-4 py-1.5 text-sm font-bold text-red-700" onClick={(e) => { if (!confirm("¿Eliminar este testimonio?")) e.preventDefault(); }}>
-                  Eliminar
+                <button type="submit" className="inline-flex items-center gap-1 rounded-full bg-red-50 px-4 py-1.5 text-sm font-bold text-red-700" onClick={(e) => { if (!confirm("¿Eliminar este testimonio?")) e.preventDefault(); }}>
+                  <Trash2 size={14} /> Eliminar
                 </button>
               </form>
             </div>
