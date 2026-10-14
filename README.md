@@ -1,6 +1,6 @@
-# Sitio de campaña — Candidato a la Gobernación
+# Página informativa
 
-Página informativa de campaña política (NO es red social): los visitantes solo
+Página informativa (NO es red social): los visitantes solo
 leen contenido.
 
 Stack: **Next.js 16 (App Router) + TypeScript + Tailwind CSS 4 + Supabase**
