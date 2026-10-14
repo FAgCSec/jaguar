@@ -1,8 +1,7 @@
-# 🌱 Sitio de campaña — Candidato a la Gobernación
+# Sitio de campaña — Candidato a la Gobernación
 
 Página informativa de campaña política (NO es red social): los visitantes solo
-leen contenido. El candidato o su equipo publica desde el panel `/admin`
-protegido con login de Supabase Auth.
+leen contenido.
 
 Stack: **Next.js 16 (App Router) + TypeScript + Tailwind CSS 4 + Supabase**
 (PostgreSQL, Storage, Auth) + `next/image`.
