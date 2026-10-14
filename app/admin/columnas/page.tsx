@@ -6,6 +6,7 @@ import { eliminarPost } from "../posts-actions";
 import type { Post } from "@/types";
 import { fechaCorta } from "@/lib/utils";
 
+// Lista de columnas en el admin. Igual que noticias pero sin filtros, muestra las 100 mas recientes.
 export const metadata: Metadata = { title: "Admin columnas" };
 
 export default async function AdminColumnas() {

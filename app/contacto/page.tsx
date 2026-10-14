@@ -3,6 +3,7 @@ import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/public/ContactForm";
 import { SITE } from "@/lib/constants";
 
+// Pagina de contacto: boton de WhatsApp, datos de la sede y formulario de voluntarios.
 export const metadata: Metadata = { title: "Contacto" };
 
 export default function ContactoPage() {

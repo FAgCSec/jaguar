@@ -2,6 +2,8 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
+// Reglas para revisar que el codigo este bien escrito (errores comunes de Next y TypeScript).
+// Ignora carpetas de compilado para no revisarlas.
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,

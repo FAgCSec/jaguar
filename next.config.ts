@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// Ajustes generales de Next.js.
+// remotePatterns: de donde se pueden cargar imagenes (Supabase y fotos de prueba).
+// Lo de turbopack es para que Tailwind funcione bien en desarrollo.
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [

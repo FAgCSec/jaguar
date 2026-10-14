@@ -4,6 +4,8 @@ import { requireAdmin } from "../../layout";
 import { guardarPost } from "../../posts-actions";
 import type { Post } from "@/types";
 
+// Pagina para editar una noticia que ya existe. La busca por id y tipo.
+// Si no la encuentra muestra 404. El formulario viene lleno con los datos actuales.
 export default async function EditarNoticia({
   params,
 }: {

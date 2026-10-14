@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 import { validarArchivo } from "@/lib/utils";
 import { guardarPdfPlan } from "../gestion-actions";
 
+// Sube el PDF del plan completo. Primero lo sube a Supabase y luego guarda la direccion.
+// Deja ver el PDF actual y reemplazarlo cuando haya nueva version.
 export function PdfPlanForm({ inicial }: { inicial: string }) {
   const [url, setUrl] = useState(inicial);
   const [subiendo, setSubiendo] = useState(false);
@@ -64,5 +66,6 @@ export function PdfPlanForm({ inicial }: { inicial: string }) {
   );
 }
 
-// Re-export para no romper imports existentes
+// Esta linea es para no dañar otros archivos que importaban validarArchivo desde aqui.
+// Mejor importar desde lib/utils, pero se deja por compatibilidad.
 export { validarArchivo };

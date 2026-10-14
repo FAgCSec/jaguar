@@ -2,10 +2,17 @@
 
 import { createClient } from "@/lib/supabase/server";
 
+// Esta funcion recibe lo que la gente escribe en el formulario de contacto y lo guarda en la base.
+// Hace varias revisiones antes: que no falten datos, que el numero y correo se vean bien,
+// que no sea un robot (campo trampa + captcha si hay claves) y que Supabase este configurado.
+
+// Revisa que el correo tenga forma valida (algo@algo.algo). No es perfecta pero frena errores de dedo.
 function esEmailValido(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
 
+// Revisa con Cloudflare o hCaptcha que quien envia sea persona.
+// Si no hay claves puestas en el .env, deja pasar igual (el campo trampa sigue cuidando).
 async function verificarCaptcha(token: string | null, ip: string | null): Promise<boolean> {
   // Si no hay claves configuradas, se permite (el honeypot sigue activo).
   const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
@@ -38,6 +45,7 @@ async function verificarCaptcha(token: string | null, ip: string | null): Promis
 }
 
 export async function enviarMensaje(formData: FormData): Promise<{ ok: boolean; error?: string }> {
+  // Se cortan los textos muy largos para que no rompan la base. Los limites coinciden con el formulario.
   const nombre = String(formData.get("nombre") ?? "").trim().slice(0, 120);
   const whatsapp = String(formData.get("whatsapp") ?? "").trim().slice(0, 20);
   const email = String(formData.get("email") ?? "").trim().slice(0, 160);
@@ -47,7 +55,7 @@ export async function enviarMensaje(formData: FormData): Promise<{ ok: boolean; 
   const captchaToken =
     String(formData.get("cf-turnstile-response") ?? formData.get("h-captcha-response") ?? "") || null;
 
-  // Honeypot: los bots lo llenan, los humanos no.
+  // Si el campo trampa viene lleno, es un robot. Se responde ok falso para que no intente de nuevo.
   if (honeypot) return { ok: true };
   if (!nombre || !whatsapp || !mensaje) return { ok: false, error: "Faltan campos." };
   if (!/^[0-9+\s()-]{7,20}$/.test(whatsapp)) return { ok: false, error: "WhatsApp inválido." };

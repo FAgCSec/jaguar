@@ -4,7 +4,7 @@ import { SITE } from "@/lib/constants";
 
 export const runtime = "edge";
 
-// OG dinámico por noticia (se usa al compartir en WhatsApp/Facebook/X)
+// Imagen al compartir una noticia en redes. Igual que la de columnas pero dice "Noticia".
 export default async function OgNoticia({
   params,
 }: {

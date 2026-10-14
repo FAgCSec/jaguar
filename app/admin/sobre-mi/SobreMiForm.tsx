@@ -6,6 +6,8 @@ import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImageUploader } from "@/components/admin/Uploaders";
 import { guardarConfig } from "../gestion-actions";
 
+// Formulario de Sobre mi y portada. Maneja foto del candidato y foto del inicio por separado.
+// Al guardar junta las urls de las fotos con el resto de campos y llama a guardarConfig.
 export function SobreMiForm({
   inicial,
 }: {

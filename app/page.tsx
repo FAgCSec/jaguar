@@ -20,14 +20,17 @@ import {
   getTestimonios,
 } from "@/lib/data";
 
+// Titulo y descripcion que sale en Google para el inicio
 export const metadata: Metadata = {
   title: `${SITE.candidato} — ${SITE.eslogan}`,
   description: SITE.descripcion,
 };
 
+// La pagina se actualiza sola cada 60 segundos sin tener que volver a publicar
 export const revalidate = 60;
 
 export default async function Home() {
+  // Se piden todos los datos al tiempo para que cargue mas rapido
   const [config, stats, noticias, columnas, galeria, semana, testimonios, propuestas] =
     await Promise.all([
       getConfig(),
@@ -45,7 +48,7 @@ export default async function Home() {
       <Hero config={config} />
       <StatsBar stats={stats} />
 
-      {/* Noticias recientes */}
+      {/* Noticias recientes en cinta que se mueve sola. Se duplica la lista para que el movimiento no se corte. */}
       <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="noticias-h">
         <div className="flex items-end justify-between gap-3">
           <div>
@@ -85,7 +88,7 @@ export default async function Home() {
         )}
       </section>
 
-      {/* Columnas */}
+      {/* Columnas de opinion, en cuadricula normal de 3 por fila */}
       <section className="bg-white" aria-labelledby="columnas-h">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <div className="flex items-end justify-between gap-3">
@@ -111,7 +114,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Propuestas (resumen) */}
+      {/* Resumen del plan: solo muestra los 3 primeros temas, el resto esta en /propuestas */}
       <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="prop-h">
         <h2 id="prop-h" className="text-2xl font-extrabold text-[#1B5E20] sm:text-3xl">
           Propuestas del plan de gobierno
@@ -126,7 +129,7 @@ export default async function Home() {
         </Link>
       </section>
 
-      {/* Galería */}
+      {/* Fotos de campaña */}
       <section className="bg-white" aria-labelledby="gal-h">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <div className="flex items-end justify-between gap-3">
@@ -142,7 +145,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Lo mejor de la semana */}
+      {/* Solo sale si hay algo publicado en los ultimos 7 dias. Si no hay, se oculta toda la seccion. */}
       {semana.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="semana-h">
           <div>
@@ -162,7 +165,7 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Testimonios */}
+      {/* Lo que dice la gente */}
       <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="test-h">
         <h2 id="test-h" className="text-center text-2xl font-extrabold text-[#1B5E20] sm:text-3xl">
           Lo que dice la gente
@@ -171,7 +174,7 @@ export default async function Home() {
         <TestimonialCarousel items={testimonios} />
       </section>
 
-      {/* Contacto */}
+      {/* Formulario para ser voluntario. Los datos llegan al panel admin en Mensajes. */}
       <section className="bg-[#1B5E20] text-white" aria-labelledby="contacto-h">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 lg:grid-cols-2">
           <div>

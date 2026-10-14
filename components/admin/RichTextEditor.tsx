@@ -16,11 +16,9 @@ import {
 } from "lucide-react";
 import { youtubeId } from "@/lib/utils";
 
-/**
- * Editor de texto enriquecido liviano (sin dependencias pesadas):
- * negritas, cursiva, títulos, listas, citas, enlaces, imágenes y YouTube.
- * El HTML se sanitiza en el servidor antes de guardar (ver lib/sanitize.ts).
- */
+// Editor sencillo para escribir noticias y columnas sin saber codigo.
+// Tiene negrita, titulos, listas, citas, enlaces, fotos y videos de YouTube.
+// Lo que se escribe se guarda en un campo oculto y en el servidor se limpia antes de guardar.
 export function RichTextEditor({
   name,
   initialValue = "",
@@ -31,17 +29,20 @@ export function RichTextEditor({
   const ref = useRef<HTMLDivElement>(null);
   const [html, setHtml] = useState(initialValue);
 
+  // Aplica un formato al texto seleccionado (negrita, titulo, lista, etc)
   function cmd(comando: string, valor?: string) {
     ref.current?.focus();
     document.execCommand(comando, false, valor);
     setHtml(ref.current?.innerHTML ?? "");
   }
 
+  // Pide la direccion y la convierte en enlace
   function insertarEnlace() {
     const url = prompt("URL del enlace (https://…):");
     if (url) cmd("createLink", url);
   }
 
+  // Pide la direccion de la foto (primero hay que subirla) y la mete en el texto
   function insertarImagen() {
     const url = prompt("URL de la imagen (súbela primero en Galería o Noticias):");
     if (!url) return;
@@ -55,6 +56,7 @@ export function RichTextEditor({
     setHtml(ref.current?.innerHTML ?? "");
   }
 
+  // Pide el link de YouTube, saca el codigo y mete el video. Si no es YouTube avisa.
   function insertarYoutube() {
     const url = prompt("URL del video de YouTube:");
     if (!url) return;

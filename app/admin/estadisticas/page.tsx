@@ -2,6 +2,8 @@ import { requireAdmin } from "../layout";
 import { eliminarStat, guardarStat } from "../gestion-actions";
 import type { Stat } from "@/types";
 
+// Manejo de los numeros del inicio. Arriba formulario para agregar, abajo lista para editar cada uno.
+// Iconos validos: map, doc, users, leaf. Si se deja vacio sale automatico.
 export default async function AdminStats() {
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("stats").select("*").order("orden").limit(50);

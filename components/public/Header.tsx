@@ -7,6 +7,8 @@ import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+// Menu de arriba que se queda fijo al bajar. En celular se vuelve boton de hamburguesa.
+// Marca con otro color la pagina donde estas parado.
 export function Header() {
   const pathname = usePathname();
   const [abierto, setAbierto] = useState(false);
@@ -15,7 +17,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 bg-[#1B5E20] text-white shadow-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 lg:px-6">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label="Inicio">
-          {/* Logo placeholder: inicial del candidato */}
+          {/* Logo sencillo: circulo con la inicial del nombre. Si quieren logo real, cambiar aqui. */}
           <span
             aria-hidden="true"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#C6D92E] text-xl font-extrabold text-[#1B5E20]"

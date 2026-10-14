@@ -4,6 +4,8 @@ import { ArrowRight, Leaf } from "lucide-react";
 import { fechaCorta } from "@/lib/utils";
 import type { Post } from "@/types";
 
+// Tarjeta que muestra una noticia o columna: foto, fecha, titulo y resumen.
+// Si no tiene foto, sale una hojita. Segun el tipo arma el enlace a /noticias o /columnas.
 export function NewsCard({ post }: { post: Post }) {
   const base = post.tipo === "columna" ? "/columnas" : "/noticias";
   return (

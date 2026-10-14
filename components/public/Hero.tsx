@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SITE } from "@/lib/constants";
 import type { SiteConfig } from "@/types";
 
+// Portada grande del inicio. El fondo y el eslogan se pueden cambiar desde el admin en Sobre mi.
+// Si no hay foto, muestra un fondo verde con degradado para que no se vea vacio.
 export function Hero({ config }: { config: SiteConfig | null }) {
   const eslogan = config?.eslogan || SITE.eslogan;
   const heroImg = config?.hero_imagen_url;
@@ -51,7 +53,7 @@ export function Hero({ config }: { config: SiteConfig | null }) {
           </Link>
         </div>
       </div>
-      {/* onda decorativa */}
+      {/* Onda blanca de abajo, solo es adorno para separar del siguiente bloque */}
       <svg viewBox="0 0 1440 60" aria-hidden="true" className="relative block w-full text-[#F5F5ED]">
         <path
           d="M0 32c240-24 480-24 720 0s480 24 720 0v28H0V32Z"

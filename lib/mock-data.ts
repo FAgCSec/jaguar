@@ -1,3 +1,6 @@
+// Datos falsos para ver el sitio sin necesidad de base de datos.
+// Se activan poniendo NEXT_PUBLIC_MOCK_DATA=1 en el .env. Sirve para probar o hacer capturas.
+// Cuando ya haya datos reales en Supabase, no se usa este archivo.
 import type {
   GalleryImage,
   Post,
@@ -10,10 +13,12 @@ import type {
 /** Datos de ejemplo en memoria: activar con NEXT_PUBLIC_MOCK_DATA=1 (borrar después). */
 export const MOCK = process.env.NEXT_PUBLIC_MOCK_DATA === "1";
 
+// Fecha de hace X dias en formato de base de datos. Sirve para que los ejemplos no salgan todos con la misma fecha.
 function haceDias(dias: number): string {
   return new Date(Date.now() - dias * 24 * 60 * 60 * 1000).toISOString();
 }
 
+// Texto falso para rellenar las noticias de prueba. Mezcla parrafos, cita y lista.
 function cuerpo(tema: string): string {
   return [
     `<p>En el marco de nuestra campaña recorrimos el territorio para escuchar a la comunidad. En <strong>${tema}</strong> confirmamos que las prioridades de la gente son claras y que un gobierno honesto nace del diálogo.</p>`,
@@ -45,6 +50,7 @@ const COLUMNAS: [string, string][] = [
   ["La selva nos enseña a resistir", "Lecciones del campo para una política honesta y con arraigo comunitario."],
 ];
 
+// Arma la lista de posts falsos a partir de titulos y resumenes. Les pone id, slug y fecha.
 function armarPosts(
   tipo: Post["tipo"],
   filas: [string, string][],

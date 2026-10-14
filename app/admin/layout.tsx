@@ -3,6 +3,8 @@ import { Sidebar } from "@/components/admin/Sidebar";
 import { createClient } from "@/lib/supabase/server";
 import { logoutAdmin } from "./login/actions";
 
+// Marco de todo el /admin: revisa si hay sesion, muestra menu lateral y boton de salir.
+// La pagina de login usa el mismo marco pero se deja pasar sin sesion.
 export default async function AdminLayout({
   children,
 }: {
@@ -31,12 +33,14 @@ async function Guard({
   user: boolean;
   children: React.ReactNode;
 }) {
+  // Sin sesion se deja pasar para que el login se pueda ver. Las demas paginas piden login por su cuenta.
   if (!user) {
     // Dejamos pasar al login; el resto redirige. Como no conocemos la ruta
     // aquí, el login muestra el formulario y las demás páginas revalidan.
     // La redirección fuerte se hace en cada página admin (ver dashboard).
     return <>{children}</>;
   }
+  // Cuenta cuantos mensajes sin leer hay para mostrar el numerito en el menu
   let pendientes = 0;
   try {
     const supabase = await createClient();
@@ -72,6 +76,8 @@ async function Guard({
   );
 }
 
+// Se usa al inicio de cada pagina del admin para frenar a quien no ha entrado.
+// Si no hay sesion, manda al login. Devuelve la conexion y el usuario para trabajar.
 export async function requireAdmin() {
   try {
     const supabase = await createClient();

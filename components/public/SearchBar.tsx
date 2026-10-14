@@ -4,12 +4,15 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { CATEGORIAS_NOTICIAS } from "@/lib/constants";
 
+// Buscador con filtros. Al escribir o elegir categoria cambia la direccion (ej: ?q=campo)
+// y la pagina vuelve a cargar con los resultados. No usa boton de buscar, es automatico.
 export function SearchBar({ mostrarTipo = false }: { mostrarTipo?: boolean }) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
 
   function actualizar(name: string, value: string) {
+    // Cambia un filtro en la direccion sin recargar toda la pagina ni mover el scroll
     const sp = new URLSearchParams(params.toString());
     if (value) sp.set(name, value);
     else sp.delete(name);

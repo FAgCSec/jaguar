@@ -6,11 +6,14 @@ import { Footer } from "@/components/public/Footer";
 import { Analytics } from "@/components/public/Analytics";
 import { SITE } from "@/lib/constants";
 
+// Fuente principal del sitio
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+// Direccion base del sitio, se usa para SEO y para compartir enlaces
 const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+// Datos que ven Google y WhatsApp al compartir: titulo, descripcion e idioma
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
@@ -33,6 +36,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Estructura que se repite en todas las paginas: menu arriba, contenido en el medio y pie abajo.
+  // El enlace de "saltar al contenido" es para personas que usan teclado o lector de pantalla.
   return (
     <html lang="es" className={`${inter.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">

@@ -4,6 +4,8 @@ import { TestimonioForm } from "./TestimonioForm";
 import { Trash2 } from "lucide-react";
 import type { Testimonial } from "@/types";
 
+// Lista de testimonios con su formulario para crear arriba y editar en cada fila.
+// El editar abre el formulario ya lleno. Borrar pide confirmacion.
 export default async function AdminTestimonios() {
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("testimonials").select("*").order("orden").limit(100);

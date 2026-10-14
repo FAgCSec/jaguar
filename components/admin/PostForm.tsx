@@ -4,7 +4,9 @@ import type { Post } from "@/types";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImageUploader } from "./Uploaders";
 
-/** Formulario compartido para noticias y columnas (crear + editar + vista previa). */
+// Formulario que sirve tanto para crear como para editar noticias y columnas.
+// Pide titulo, slug, categoria, resumen, foto y texto. Tiene dos botones: guardar borrador o publicar.
+// Si ya existe el post, muestra enlace de vista previa.
 export function PostForm({
   post,
   tipo,
@@ -39,6 +41,7 @@ export function PostForm({
             placeholder="se-genera-del-titulo"
             className="rounded-xl bg-[#F5F5ED] px-4 py-2.5 font-normal outline-none ring-1 ring-[#2E7D32]/15 focus:ring-2 focus:ring-[#2E7D32]"
           />
+          {/* Si se deja vacio, se crea solo a partir del titulo. Debe ser unico. */}
           <span className="text-xs font-normal text-[#1A1A1A]/60">
             Vacío = se genera solo del título.
           </span>

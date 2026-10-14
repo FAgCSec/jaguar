@@ -4,6 +4,8 @@ import { NewsCard } from "@/components/public/NewsCard";
 import { SearchBar } from "@/components/public/SearchBar";
 import { buscarPosts } from "@/lib/data";
 
+// Pagina con todas las noticias. Acepta ?q=texto y ?categoria=... para filtrar.
+// Se actualiza cada 60 segundos.
 export const metadata: Metadata = { title: "Noticias" };
 export const revalidate = 60;
 

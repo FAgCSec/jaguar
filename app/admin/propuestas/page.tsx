@@ -8,6 +8,8 @@ import {
 import { PdfPlanForm } from "./PdfPlanForm";
 import { Plus, Sprout, Trash2 } from "lucide-react";
 
+// Manejo del plan: pdf arriba, luego crear temas y dentro de cada tema sus propuestas.
+// Cada propuesta se puede editar en el mismo cuadro y guardar, o borrar.
 export default async function AdminPropuestas() {
   const { supabase } = await requireAdmin();
   const [{ data: grupos }, { data: config }] = await Promise.all([

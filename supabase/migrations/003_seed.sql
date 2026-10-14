@@ -1,6 +1,7 @@
 -- ============================================================
--- Migración 003: datos de ejemplo (seed) para ver el sitio poblado
--- Puedes borrarlos desde /admin cuando publiques contenido real.
+-- Datos de ejemplo para que el sitio no se vea vacio al inicio.
+-- Borrar desde el /admin cuando ya haya contenido real.
+-- Se ejecuta de ultimo, despues del 001 y 002.
 -- ============================================================
 
 -- Noticias de ejemplo

@@ -3,7 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/app/admin/layout";
 
-// ---------- GALERÍA ----------
+// Aqui estan las acciones para guardar y borrar fotos, testimonios, numeros, propuestas y mensajes.
+// Todas piden login primero y al final refrescan la pagina publica para que se vean los cambios.
+
+// --- Fotos ---
+// Agrega una foto al final de la galeria (con el numero de orden mas alto + 1)
 export async function agregarFoto(formData: FormData) {
   const { supabase } = await requireAdmin();
   const url = String(formData.get("url") ?? "").trim();
@@ -17,6 +21,7 @@ export async function agregarFoto(formData: FormData) {
   revalidatePath("/galeria");
 }
 
+// Borra una foto de la galeria
 export async function eliminarFoto(id: string) {
   const { supabase } = await requireAdmin();
   await supabase.from("gallery_images").delete().eq("id", id);
@@ -24,6 +29,7 @@ export async function eliminarFoto(id: string) {
   revalidatePath("/galeria");
 }
 
+// Cambia el orden de una foto con la de al lado (subir o bajar). Intercambia los numeros de orden.
 export async function reordenarFoto(id: string, direccion: "up" | "down") {
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("gallery_images").select("*").order("orden");
@@ -40,7 +46,8 @@ export async function reordenarFoto(id: string, direccion: "up" | "down") {
   revalidatePath("/galeria");
 }
 
-// ---------- TESTIMONIOS ----------
+// --- Testimonios ---
+// Guarda un testimonio nuevo o edita uno que ya existe (si trae id, edita; si no, crea)
 export async function guardarTestimonio(formData: FormData) {
   const { supabase } = await requireAdmin();
   const id = String(formData.get("id") ?? "") || null;
@@ -66,7 +73,8 @@ export async function eliminarTestimonio(id: string) {
   revalidatePath("/");
 }
 
-// ---------- ESTADÍSTICAS ----------
+// --- Numeros del inicio ---
+// Guarda un numero nuevo o edita uno existente (etiqueta, valor, icono y orden)
 export async function guardarStat(formData: FormData) {
   const { supabase } = await requireAdmin();
   const id = String(formData.get("id") ?? "") || null;
@@ -91,7 +99,8 @@ export async function eliminarStat(id: string) {
   revalidatePath("/");
 }
 
-// ---------- PROPUESTAS ----------
+// --- Temas y propuestas del plan ---
+// Crea un tema nuevo (grupo) al final de la lista
 export async function guardarGrupo(formData: FormData) {
   const { supabase } = await requireAdmin();
   const tema = String(formData.get("tema") ?? "").trim().slice(0, 120);
@@ -104,6 +113,7 @@ export async function guardarGrupo(formData: FormData) {
   revalidatePath("/");
 }
 
+// Borra un tema con todas sus propuestas (por la relacion en la base se borran juntas)
 export async function eliminarGrupo(id: string) {
   const { supabase } = await requireAdmin();
   await supabase.from("proposal_groups").delete().eq("id", id);
@@ -111,6 +121,7 @@ export async function eliminarGrupo(id: string) {
   revalidatePath("/");
 }
 
+// Guarda una propuesta dentro de un tema (nueva o editada)
 export async function guardarPropuesta(formData: FormData) {
   const { supabase } = await requireAdmin();
   const id = String(formData.get("id") ?? "") || null;
@@ -138,7 +149,8 @@ export async function eliminarPropuesta(id: string) {
   revalidatePath("/");
 }
 
-// ---------- SOBRE MÍ / CONFIG ----------
+// --- Configuracion general ---
+// Guarda la direccion del PDF del plan. Se edita aparte para no mezclar con el resto.
 export async function guardarPdfPlan(formData: FormData) {
   const { supabase } = await requireAdmin();
   const pdf_plan_url = String(formData.get("pdf_plan_url") ?? "").trim() || null;
@@ -150,6 +162,7 @@ export async function guardarPdfPlan(formData: FormData) {
   revalidatePath("/propuestas");
 }
 
+// Guarda eslogan, biografia, fotos y pdf. Limpia el HTML de la biografia antes de guardar.
 export async function guardarConfig(formData: FormData) {
   const { supabase } = await requireAdmin();
   const { limpiarHtml } = await import("@/lib/sanitize");
@@ -168,13 +181,15 @@ export async function guardarConfig(formData: FormData) {
   revalidatePath("/propuestas");
 }
 
-// ---------- MENSAJES ----------
+// --- Mensajes de la gente ---
+// Marca un mensaje como leido o sin leer para llevar control de pendientes
 export async function marcarLeido(id: string, leido: boolean) {
   const { supabase } = await requireAdmin();
   await supabase.from("contact_messages").update({ leido }).eq("id", id);
   revalidatePath("/admin/mensajes");
 }
 
+// Borra un mensaje ya atendido o que sea spam
 export async function eliminarMensaje(id: string) {
   const { supabase } = await requireAdmin();
   await supabase.from("contact_messages").delete().eq("id", id);

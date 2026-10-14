@@ -3,6 +3,8 @@ import { PostForm } from "@/components/admin/PostForm";
 import { requireAdmin } from "../../layout";
 import { guardarPost } from "../../posts-actions";
 
+// Pagina para crear una noticia nueva. Pide login y muestra el formulario vacio.
+// Al guardar llama a guardarPost con tipo noticia.
 export const metadata: Metadata = { title: "Nueva noticia" };
 
 export default async function NuevaNoticia() {

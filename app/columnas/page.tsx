@@ -4,6 +4,7 @@ import { NewsCard } from "@/components/public/NewsCard";
 import { SearchBar } from "@/components/public/SearchBar";
 import { buscarPosts } from "@/lib/data";
 
+// Pagina con todas las columnas de opinion. Igual que noticias pero tipo columna.
 export const metadata: Metadata = { title: "Columnas de opinión" };
 export const revalidate = 60;
 

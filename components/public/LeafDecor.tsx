@@ -1,4 +1,4 @@
-// Decoración sutil de hojas de selva (SVG inline, sin imágenes externas).
+// Dibujo sencillo de hoja para adornar las secciones. No es imagen, es codigo SVG asi carga rapido.
 export function HojaDecorativa({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -22,6 +22,7 @@ export function HojaDecorativa({ className = "" }: { className?: string }) {
   );
 }
 
+// Linea con hojitas que separa los titulos del contenido. Solo adorno.
 export function DivisorHojas() {
   return (
     <div aria-hidden="true" className="flex items-center justify-center gap-2 py-2 text-[#2E7D32]">

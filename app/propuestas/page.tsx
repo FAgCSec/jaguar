@@ -3,6 +3,8 @@ import { FileText } from "lucide-react";
 import { ProposalSection } from "@/components/public/ProposalSection";
 import { getPropuestas } from "@/lib/data";
 
+// Pagina con el plan de gobierno completo. Aqui si salen abiertos los temas desde el inicio.
+// Si aun no hay nada cargado, sale mensaje de "vuelve pronto".
 export const metadata: Metadata = { title: "Propuestas" };
 export const revalidate = 60;
 

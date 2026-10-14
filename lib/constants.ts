@@ -1,16 +1,18 @@
 // ============================================================
-// 📌 CONFIGURACIÓN CENTRAL DEL CANDIDATO
-// 👉 CAMBIA AQUÍ el nombre, eslogan, colores y redes sociales.
-// Todo el sitio (header, hero, footer, SEO) lee de este archivo.
+// Datos generales del sitio. Si hay que cambiar nombre, telefono,
+// redes o colores, se hace aqui y se refleja en todas las paginas.
+// No hay que buscar en otros archivos.
 // ============================================================
 
 export const SITE = {
+  // Nombre y datos del candidato. Cambiar aqui cuando sea necesario.
   candidato: "Nombre del Candidato", // ← CAMBIAR: nombre completo
   candidatoCorto: "Candidato", // ← CAMBIAR: nombre corto para el logo
   eslogan: "La selva florece con trabajo honesto", // ← CAMBIAR: eslogan de campaña
   departamento: "Nuestro Departamento", // ← CAMBIAR
   cargo: "Candidato a la Gobernación",
   descripcion:
+    // Este texto sale en Google y al compartir el enlace en WhatsApp.
     "Sitio oficial de campaña: noticias, columnas de opinión, propuestas y actividades del candidato a la gobernación.",
   email: "contacto@ejemplo.com", // ← CAMBIAR
   whatsapp: "3000000000", // ← CAMBIAR: solo números, para enlaces wa.me
@@ -25,7 +27,8 @@ export const SITE = {
   },
 } as const;
 
-// Paleta selva / campesina (ver README para cambiarla)
+// Colores del sitio (verde selva, amarillo lima, fondo crema).
+// Si se quieren cambiar, tambien hay que mirar app/globals.css que tiene los mismos tonos.
 export const COLORS = {
   verdeOscuro: "#1B5E20",
   verdeSelva: "#2E7D32",
@@ -35,6 +38,7 @@ export const COLORS = {
   texto: "#1A1A1A",
 } as const;
 
+// Enlaces que salen en el menu de arriba y en el pie de pagina. Agregar o quitar aqui.
 export const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/noticias", label: "Noticias" },
@@ -45,6 +49,7 @@ export const NAV_LINKS = [
   { href: "/contacto", label: "Contacto" },
 ] as const;
 
+// Categorias disponibles al crear una noticia. Salen en el filtro de busqueda.
 export const CATEGORIAS_NOTICIAS = [
   "Campaña",
   "Territorio",
@@ -53,7 +58,7 @@ export const CATEGORIAS_NOTICIAS = [
   "Prensa",
 ] as const;
 
-// Límites de subida (5 MB, solo imágenes + PDF para el plan)
+// Reglas para subir archivos: peso maximo y que tipos de imagen se aceptan.
 export const UPLOAD = {
   maxBytes: 5 * 1024 * 1024,
   imagenesAceptadas: ["image/jpeg", "image/png", "image/webp", "image/avif"],

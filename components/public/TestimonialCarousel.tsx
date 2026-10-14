@@ -1,10 +1,8 @@
 import Image from "next/image";
 import type { Testimonial } from "@/types";
 
-/**
- * Testimonios en cinta que se desplaza sola (bucle infinito).
- * Se pausa al pasar el mouse y respeta "reducir movimiento" del sistema.
- */
+// Cinta con opiniones que se mueve sola. Se duplica la lista para que de la vuelta sin cortarse.
+// Si no hay testimonios, no se muestra nada.
 export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   if (!items.length) return null;
   const doble = [...items, ...items];

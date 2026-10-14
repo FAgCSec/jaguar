@@ -1,12 +1,6 @@
-/**
- * Exporta todo el contenido a JSON (backup / migraciones futuras).
- * Uso:
- *   1. Configura SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY en el entorno.
- *   2. npx tsx scripts/export-content.ts [carpeta-destino]
- *
- * Genera un archivo backup-AAAA-MM-DD.json con posts, galería,
- * testimonios, stats, propuestas, config y mensajes.
- */
+// Saca copia de todo el contenido en un archivo JSON para guardar o mover a otro lado.
+// Como se usa: poner las claves en el .env y correr npx tsx scripts/export-content.ts
+// Genera un archivo backup-fecha.json con posts, fotos, testimonios, numeros, propuestas y mensajes.
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createClient } from "@supabase/supabase-js";

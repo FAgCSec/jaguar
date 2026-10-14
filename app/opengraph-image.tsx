@@ -5,7 +5,8 @@ export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// OG genérico del sitio (WhatsApp / Facebook / X)
+// Imagen que sale al compartir el inicio en WhatsApp o Facebook.
+// Se genera sola con el cargo, nombre y eslogan. Para cambiar el diseño, tocar aqui.
 export default async function OgImage() {
   return new ImageResponse(
     (

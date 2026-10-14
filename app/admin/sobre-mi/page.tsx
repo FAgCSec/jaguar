@@ -1,6 +1,7 @@
 import { requireAdmin } from "../layout";
 import { SobreMiForm } from "./SobreMiForm";
 
+// Pagina para editar eslogan, biografia y fotos. Solo trae la fila 1 de site_config que es la unica que existe.
 export default async function AdminSobreMi() {
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("site_config").select("*").eq("id", 1).single();

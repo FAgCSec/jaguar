@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Colores del sitio en un solo lugar. Si cambias un codigo aqui, cambia en todo el sitio. */
 @theme {
   --color-selva-950: #0d3311;
   --color-selva-900: #1b5e20;
@@ -27,7 +28,8 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Contenido de artículos (HTML sanitizado del editor) */
+/* Estilos para los articulos que escribe el equipo en el editor.
+   Como ese texto viene con HTML, aqui se le da buena pinta: espacios, citas verdes, imagenes redondeadas. */
 .prose-campana p {
   margin-bottom: 1rem;
   line-height: 1.75;
@@ -87,7 +89,8 @@ body {
   text-underline-offset: 2px;
 }
 
-/* Carrusel de testimonios: desplazamiento automático en bucle */
+/* Cinta que se mueve sola para noticias y testimonios. Se detiene al pasar el mouse.
+   Si el usuario tiene activado "reducir movimiento", no se mueve. */
 @keyframes marquee {
   from {
     transform: translateX(0);

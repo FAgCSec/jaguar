@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GalleryGrid } from "@/components/public/GalleryGrid";
 import { getGaleria } from "@/lib/data";
 
+// Pagina de fotos. Trae hasta 60 fotos ordenadas.
 export const metadata: Metadata = { title: "Galería" };
 export const revalidate = 60;
 

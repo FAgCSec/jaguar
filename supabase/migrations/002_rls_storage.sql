@@ -1,7 +1,7 @@
 -- ============================================================
--- Migración 002: Row Level Security + buckets de Storage
--- Lectura pública SOLO de contenido publicado.
--- Escritura SOLO para usuarios autenticados (admin, 1-2 cuentas).
+-- Permisos de seguridad (RLS) y carpetas de archivos.
+-- El publico solo puede ver lo publicado. Solo el equipo con sesion puede crear, editar o borrar.
+-- Se ejecuta despues del 001.
 -- ============================================================
 
 alter table public.posts enable row level security;
@@ -31,10 +31,10 @@ drop policy if exists "config_admin" on public.site_config;
 drop policy if exists "contacto_insert_publico" on public.contact_messages;
 drop policy if exists "contacto_admin" on public.contact_messages;
 
--- posts: el público solo ve publicados
+-- El publico solo ve posts publicados, el equipo ve todo
 create policy "posts_publicos_legibles" on public.posts
   for select using (estado = 'publicado');
--- admin autenticado: todo
+-- Solo el equipo con sesion puede escribir
 create policy "posts_admin_total" on public.posts
   for all to authenticated using (true) with check (true);
 
@@ -68,15 +68,15 @@ create policy "config_publica" on public.site_config
 create policy "config_admin" on public.site_config
   for all to authenticated using (true) with check (true);
 
--- contacto: cualquiera puede insertar (formulario público), solo admin lee/actualiza
+-- El formulario publico puede guardar mensajes, pero solo el equipo los puede leer
 create policy "contacto_insert_publico" on public.contact_messages
   for insert with check (true);
 create policy "contacto_admin" on public.contact_messages
   for all to authenticated using (true) with check (true);
 
--- ---------- Storage ----------
--- Crear con: insert into storage.buckets ... (requiere permisos).
--- Si ya existen, no falla gracias a on conflict.
+-- ---------- Archivos ----------
+-- Carpetas para fotos (imagenes) y pdfs (documentos). Todos pueden ver, solo el equipo puede subir.
+-- Si ya existen no da error.
 insert into storage.buckets (id, name, public)
   values ('imagenes', 'imagenes', true),
          ('documentos', 'documentos', true)

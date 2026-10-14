@@ -1,5 +1,8 @@
 import sanitizeHtml from "sanitize-html";
 
+// Aqui se dice que etiquetas se permiten en los textos del editor (parrafos, negritas, listas, etc).
+// Todo lo demas se borra para evitar codigo peligroso.
+// Los videos solo se permiten si son de YouTube.
 /** Opciones compartidas servidor + cliente para el HTML del editor. */
 const OPCIONES = {
   allowedTags: [
@@ -35,7 +38,7 @@ const OPCIONES = {
   allowedIframeHostnames: ["www.youtube.com", "youtube.com", "youtu.be", "www.youtube-nocookie.com"],
 } as const;
 
-/** Sanitiza HTML en el servidor (guardar y renderizar). Previene XSS. */
+// Limpia el HTML antes de guardarlo o mostrarlo. Quita scripts y cosas raras que puedan hacer daño.
 export function limpiarHtml(dirty: string): string {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return sanitizeHtml(dirty ?? "", OPCIONES as any);

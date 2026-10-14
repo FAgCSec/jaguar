@@ -6,6 +6,9 @@ import { ImageUploader } from "@/components/admin/Uploaders";
 import { guardarTestimonio } from "../gestion-actions";
 import type { Testimonial } from "@/types";
 
+// Formulario para crear o editar un testimonio.
+// Si viene con datos (inicial) muestra primero solo boton Editar y al abrir llena los campos.
+// Si es nuevo, muestra boton Nuevo testimonio. El orden dice en que posicion sale.
 export function TestimonioForm({ inicial }: { inicial?: Testimonial | null }) {
   const [abierto, setAbierto] = useState(!!inicial);
   if (!abierto && inicial) {

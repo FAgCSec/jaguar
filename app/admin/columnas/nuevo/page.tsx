@@ -2,6 +2,7 @@ import { PostForm } from "@/components/admin/PostForm";
 import { requireAdmin } from "../../layout";
 import { guardarPost } from "../../posts-actions";
 
+// Crear una columna nueva. Igual que noticia pero con tipo columna para que salga en su seccion.
 export default async function NuevaColumna() {
   await requireAdmin();
   async function action(fd: FormData) {

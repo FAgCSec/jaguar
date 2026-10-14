@@ -1,6 +1,8 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+// Mantiene la sesion al dia en cada visita. Si no hay claves, deja pasar sin hacer nada.
+// Se llama desde el proxy en cada peticion.
 export async function updateSession(request: NextRequest) {
   // Sin credenciales (build/CI o .env ausente): no hay sesión que refrescar.
   if (

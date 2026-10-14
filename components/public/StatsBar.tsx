@@ -1,6 +1,7 @@
 import { Camera, FileText, Leaf, Map, Sprout, Users, type LucideIcon } from "lucide-react";
 import type { Stat } from "@/types";
 
+// Dibuja cada icono segun el nombre guardado en la base (map, doc, users...). Si no coincide, sale una plantica.
 const ICONOS: Record<string, LucideIcon> = {
   map: Map,
   doc: FileText,
@@ -9,6 +10,7 @@ const ICONOS: Record<string, LucideIcon> = {
   camera: Camera,
 };
 
+// Barra de numeros del inicio. Si no hay datos, no muestra nada para no dejar hueco vacio.
 export function StatsBar({ stats }: { stats: Stat[] }) {
   if (!stats.length) return null;
   return (

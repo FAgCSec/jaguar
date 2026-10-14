@@ -4,6 +4,8 @@ import { SITE } from "@/lib/constants";
 
 export const runtime = "edge";
 
+// Imagen al compartir una columna. Busca el titulo por el slug y lo pone en la imagen.
+// Si no lo encuentra, pone el nombre del candidato. Corta titulos muy largos.
 export default async function OgColumna({
   params,
 }: {

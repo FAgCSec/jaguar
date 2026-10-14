@@ -6,6 +6,9 @@ import { createClient } from "@/lib/supabase/client";
 import { validarArchivo } from "@/lib/utils";
 import { agregarFoto } from "../gestion-actions";
 
+// Formulario para subir una foto a la galeria.
+// Primero se sube el archivo a Supabase y luego se guarda la direccion con su titulo.
+// El boton solo se activa cuando ya hay foto cargada.
 export function NuevaFotoForm() {
   const [url, setUrl] = useState("");
   const [subiendo, setSubiendo] = useState(false);

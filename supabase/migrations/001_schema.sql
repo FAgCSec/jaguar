@@ -1,10 +1,12 @@
 -- ============================================================
--- Migración 001: esquema base de la campaña
--- Tablas: posts, gallery_images, testimonials, stats,
---         proposal_groups, proposals, site_config, contact_messages
+-- Tablas base del sitio: noticias/columnas, fotos, testimonios,
+-- numeros, temas, propuestas, configuracion y mensajes.
+-- Se ejecuta primero en el editor SQL de Supabase.
 -- ============================================================
 
 -- ---------- posts (noticias + columnas) ----------
+-- Aqui van noticias y columnas juntas, el campo tipo dice cual es.
+-- Estado dice si ya se ve en publico (publicado) o aun no (borrador).
 create table if not exists public.posts (
   id uuid primary key default gen_random_uuid(),
   tipo text not null check (tipo in ('noticia', 'columna')),
@@ -23,6 +25,7 @@ create index if not exists posts_slug_idx on public.posts (slug);
 create index if not exists posts_published_idx on public.posts (published_at desc nulls last);
 
 -- ---------- galería ----------
+-- Fotos de campaña. Orden dice en que posicion salen.
 create table if not exists public.gallery_images (
   id uuid primary key default gen_random_uuid(),
   url text not null,
@@ -32,6 +35,7 @@ create table if not exists public.gallery_images (
 );
 
 -- ---------- testimonios ----------
+-- Opiniones de la gente que salen en el carrusel del inicio.
 create table if not exists public.testimonials (
   id uuid primary key default gen_random_uuid(),
   nombre text not null,
@@ -42,6 +46,7 @@ create table if not exists public.testimonials (
 );
 
 -- ---------- estadísticas del hero ----------
+-- Numeros del inicio, ej "32 municipios". Icono es el dibujo que acompaña.
 create table if not exists public.stats (
   id uuid primary key default gen_random_uuid(),
   etiqueta text not null,
@@ -51,6 +56,8 @@ create table if not exists public.stats (
 );
 
 -- ---------- propuestas ----------
+-- Temas grandes (ej Salud) y propuestas chicas dentro de cada tema.
+-- Si se borra un tema, se borran sus propuestas automaticamente.
 create table if not exists public.proposal_groups (
   id uuid primary key default gen_random_uuid(),
   tema text not null,
@@ -67,6 +74,7 @@ create table if not exists public.proposals (
 create index if not exists proposals_group_idx on public.proposals (group_id);
 
 -- ---------- configuración del sitio (singleton, id = 1) ----------
+-- Solo hay una fila con id 1. Aqui va eslogan, biografia, fotos y pdf. No crear mas filas.
 create table if not exists public.site_config (
   id integer primary key check (id = 1),
   eslogan text not null default '',
@@ -81,6 +89,7 @@ insert into public.site_config (id, eslogan)
   on conflict (id) do nothing;
 
 -- ---------- mensajes de contacto / voluntarios ----------
+-- Lo que deja la gente en el formulario. Leido sirve para saber si ya se atendio.
 create table if not exists public.contact_messages (
   id uuid primary key default gen_random_uuid(),
   nombre text not null,

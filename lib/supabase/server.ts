@@ -1,6 +1,8 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+// Conexion a la base desde el servidor (paginas y acciones del admin).
+// Guarda la sesion en cookies para saber si el usuario entro o no.
 export async function createClient() {
   const cookieStore = await cookies();
   return createServerClient(
@@ -27,7 +29,8 @@ export async function createClient() {
   );
 }
 
-/** Cliente con service_role — SOLO en server actions / scripts, nunca en el cliente. */
+// Cliente con permisos totales. Solo se usa en el servidor y en scripts, nunca en el navegador.
+// Si esto llega al cliente, cualquiera podria borrar o cambiar datos.
 export async function createServiceClient() {
   const cookieStore = await cookies();
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;

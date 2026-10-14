@@ -2,10 +2,8 @@
 
 import Script from "next/script";
 
-/**
- * Analytics ligero y privado (Umami o Plausible).
- * Se activa solo si hay variables de entorno configuradas.
- */
+// Mide visitas sin usar cookies invasivas. Solo se activa si hay claves en el .env.
+// Acepta Umami o Plausible, el que este configurado.
 export function Analytics() {
   const umamiUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
   const umamiId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;

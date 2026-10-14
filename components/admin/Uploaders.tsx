@@ -5,13 +5,15 @@ import { ImagePlus } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { validarArchivo } from "@/lib/utils";
 
+// Crea un nombre unico para no pisar archivos con el mismo nombre. Incluye la carpeta (ej: noticias/123-abc.jpg)
 function nombreUnico(original: string, carpeta: string) {
   const ext = original.split(".").pop()?.toLowerCase() ?? "jpg";
   const base = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   return `${carpeta}/${base}.${ext}`;
 }
 
-/** Sube una imagen a Supabase Storage (bucket `imagenes`) y devuelve su URL. */
+// Sube una foto a Supabase (carpeta imagenes) y guarda la direccion para usarla en el formulario.
+// Muestra vista previa y deja quitarla. Revisa tipo y peso antes de subir.
 export function ImageUploader({
   name,
   initialUrl = "",
@@ -27,11 +29,13 @@ export function ImageUploader({
   const [subiendo, setSubiendo] = useState(false);
   const [error, setError] = useState("");
 
+  // Guarda la nueva direccion y avisa al formulario papa si lo necesita
   function fijar(nueva: string) {
     setUrl(nueva);
     onUrl?.(nueva);
   }
 
+  // Cuando eligen foto: revisa que sea valida, la sube a Supabase y guarda la direccion publica
   async function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -86,7 +90,7 @@ export function ImageUploader({
   );
 }
 
-/** Sube el PDF del plan de gobierno (bucket `documentos`). */
+// Sube el PDF del plan (carpeta documentos). Solo acepta PDF de maximo 5 MB.
 export function PdfUploader({ name, initialUrl = "" }: { name: string; initialUrl?: string }) {
   const [url, setUrl] = useState(initialUrl);
   const [subiendo, setSubiendo] = useState(false);

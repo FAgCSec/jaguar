@@ -3,7 +3,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-// Rate limiting simple en memoria: 5 intentos por IP cada 10 minutos.
+// Entrada y salida del panel.
+// Por seguridad solo deja 5 intentos cada 10 minutos por correo. Si se pasa, toca esperar.
+// Los mensajes de error explican si fue clave mala o si el correo no esta confirmado.
 const intentos = new Map<string, { n: number; hasta: number }>();
 const MAX_INTENTOS = 5;
 const VENTANA_MS = 10 * 60 * 1000;
@@ -44,6 +46,7 @@ export async function loginAdmin(
   redirect("/admin");
 }
 
+// Cierra la sesion y devuelve al login
 export async function logoutAdmin() {
   const supabase = await createClient();
   await supabase.auth.signOut();

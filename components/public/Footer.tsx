@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
+// Pie de pagina con datos, enlaces y redes. Sale en todas las paginas.
+// Los datos salen de lib/constants.ts, no escribirlos aqui a mano.
 export function Footer() {
   return (
     <footer className="bg-[#1B5E20] text-white">

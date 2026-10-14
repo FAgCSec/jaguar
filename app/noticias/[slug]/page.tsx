@@ -9,8 +9,11 @@ import { limpiarHtml } from "@/lib/sanitize";
 import { SITE } from "@/lib/constants";
 import { fechaCorta } from "@/lib/utils";
 
+// Detalle de una noticia. La direccion es /noticias/lo-que-sea.
+// Si el slug no existe, muestra pagina 404.
 export const revalidate = 60;
 
+// Arma el titulo y descripcion para Google y WhatsApp segun cada noticia
 export async function generateMetadata({
   params,
 }: {
@@ -39,6 +42,7 @@ export default async function NoticiaDetalle({
   const { slug } = await params;
   const post = await getPostBySlug("noticia", slug);
   if (!post) notFound();
+  // Busca otras noticias para sugerir al final, sin incluir la que se esta viendo
   const relacionadas = (await buscarPosts({ tipo: "noticia", limite: 4 })).filter(
     (p) => p.slug !== slug,
   ).slice(0, 3);
@@ -71,10 +75,12 @@ export default async function NoticiaDetalle({
           className="mt-6 w-full rounded-2xl object-cover shadow-lg"
         />
       )}
+      {/* El texto viene con HTML del editor, por eso se limpia antes de mostrarlo */}
       <div
         className="prose-campana mt-6"
         dangerouslySetInnerHTML={{ __html: limpiarHtml(post.contenido) }}
       />
+      {/* Botones para compartir en redes */}
       <div className="mt-8 flex flex-wrap gap-2">
         <span className="text-sm font-bold">Compartir:</span>
         <a

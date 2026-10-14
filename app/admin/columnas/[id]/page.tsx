@@ -4,6 +4,7 @@ import { requireAdmin } from "../../layout";
 import { guardarPost } from "../../posts-actions";
 import type { Post } from "@/types";
 
+// Editar una columna existente. Si el id no es de tipo columna, muestra 404.
 export default async function EditarColumna({
   params,
 }: {

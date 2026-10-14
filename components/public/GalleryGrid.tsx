@@ -5,14 +5,19 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Sprout, X } from "lucide-react";
 import type { GalleryImage } from "@/types";
 
+// Cuadricula de fotos con visor grande al hacer clic.
+// Con flechas o teclado se pasa de foto, con Escape o clic afuera se cierra.
+// El patron hace que algunas fotos salgan mas grandes para que no se vea todo igual.
 const PATRON: Record<number, string> = {
   0: "sm:col-span-2 sm:row-span-2",
   3: "sm:col-span-2",
 };
 
 export function GalleryGrid({ imagenes }: { imagenes: GalleryImage[] }) {
+  // Guarda cual foto esta abierta en grande. null = ninguna abierta.
   const [indice, setIndice] = useState<number | null>(null);
 
+  // Cuando se abre el visor: bloquea el fondo para que no se mueva y escucha el teclado.
   useEffect(() => {
     if (indice === null) return;
     const overflowPrevio = document.body.style.overflow;
@@ -35,6 +40,7 @@ export function GalleryGrid({ imagenes }: { imagenes: GalleryImage[] }) {
     };
   }, [indice, imagenes.length]);
 
+  // Si no hay fotos todavia, mostrar mensaje amable en vez de dejar vacio.
   if (!imagenes.length) {
     return (
       <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center text-[#1A1A1A]/70 shadow">

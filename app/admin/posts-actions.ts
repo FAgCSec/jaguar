@@ -6,11 +6,14 @@ import { requireAdmin } from "@/app/admin/layout";
 import { limpiarHtml } from "@/lib/sanitize";
 import { slugify } from "@/lib/utils";
 
+// Arma la direccion web a partir del titulo o del slug escrito. Si queda vacio, inventa uno con la fecha.
 function slugFinal(titulo: string, slug: string) {
   const base = slugify(slug || titulo);
   return base || `articulo-${Date.now()}`;
 }
 
+// Guarda una noticia o columna (nueva o editada). Limpia el HTML, revisa que no este vacia
+// y que tenga titulo. Si es publicada le pone fecha de hoy. Al final actualiza las paginas y vuelve al listado.
 export async function guardarPost(
   tipo: "noticia" | "columna",
   id: string | null,
@@ -42,7 +45,8 @@ export async function guardarPost(
     published_at: estado === "publicado" ? new Date().toISOString() : null,
   };
 
-  // Si se edita y se despublica, conservamos published_at original.
+  // Si se edita y se quita lo publicado, se guarda la fecha vieja por si se vuelve a publicar.
+  // Asi no pierde la fecha original.
   if (id) {
     const { data: actual } = await supabase.from("posts").select("published_at").eq("id", id).single();
     const prev = (actual as { published_at: string | null } | null)?.published_at ?? null;
@@ -68,6 +72,7 @@ export async function guardarPost(
   redirect(`/admin/${tipo === "columna" ? "columnas" : "noticias"}`);
 }
 
+// Borra una noticia o columna y vuelve al listado. Actualiza la pagina publica para que ya no salga.
 export async function eliminarPost(id: string, tipo: "noticia" | "columna") {
   const { supabase } = await requireAdmin();
   await supabase.from("posts").delete().eq("id", id);

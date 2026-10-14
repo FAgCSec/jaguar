@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+// Enlaces del menu lateral del admin. Para agregar una seccion nueva, añadirla aqui.
 export const ADMIN_LINKS: { href: string; label: string; Icono: LucideIcon }[] = [
   { href: "/admin", label: "Panel", Icono: LayoutDashboard },
   { href: "/admin/noticias", label: "Noticias", Icono: Newspaper },
@@ -24,6 +25,8 @@ export const ADMIN_LINKS: { href: string; label: string; Icono: LucideIcon }[] =
   { href: "/admin/mensajes", label: "Mensajes", Icono: Inbox },
 ];
 
+// Menu lateral del panel. En celular sale arriba en horizontal, en compu al lado.
+// Si hay mensajes sin leer, muestra el numero al lado de Mensajes.
 export function Sidebar({ pendientes }: { pendientes: number }) {
   return (
     <aside className="w-full shrink-0 bg-[#1B5E20] text-white lg:min-h-screen lg:w-60">

@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
 
+// Mapa del sitio para Google: lista las paginas fijas mas cada noticia y columna publicada.
+// Si falla la base, al menos devuelve las fijas para no dejar vacio.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const estaticas = ["", "/noticias", "/columnas", "/galeria", "/propuestas", "/sobre-mi", "/contacto"].map(

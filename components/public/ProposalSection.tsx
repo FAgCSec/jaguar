@@ -9,9 +9,13 @@ import {
 } from "lucide-react";
 import type { ProposalGroup } from "@/types";
 
+// Cada tema lleva su icono y color de borde para diferenciarlos.
+// Se van rotando segun la posicion.
 const ICONOS: LucideIcon[] = [Sprout, HeartPulse, Route];
 const FRANJAS = ["border-l-[#1B5E20]", "border-l-[#C6D92E]", "border-l-[#2E7D32]"];
 
+// Lista de temas del plan que se abren y cierran al hacer clic.
+// Abiertos = si vienen abiertos desde el inicio (en /propuestas si, en el inicio no).
 export function ProposalSection({
   grupos,
   pdfUrl,

@@ -4,6 +4,8 @@ import { NuevaFotoForm } from "./NuevaFotoForm";
 import { ArrowDown, ArrowUp, Camera, X } from "lucide-react";
 import type { GalleryImage } from "@/types";
 
+// Manejo de la galeria: formulario para subir arriba y lista abajo con botones para
+// subir/bajar el orden o borrar. Todo pide confirmacion al borrar.
 export default async function AdminGaleria() {
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("gallery_images").select("*").order("orden").limit(200);

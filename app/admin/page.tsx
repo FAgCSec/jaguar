@@ -10,10 +10,13 @@ import {
 } from "lucide-react";
 import { requireAdmin } from "./layout";
 
+// Portada del panel con resumen: cuantos publicados, borradores, mensajes, fotos y testimonios.
+// Cada tarjeta lleva a su seccion para trabajar.
 export const metadata: Metadata = { title: "Panel" };
 
 export default async function AdminDashboard() {
   const { supabase } = await requireAdmin();
+  // Se piden los conteos al tiempo para que cargue rapido
   const [posts, mensajes, galeria, testimonios] = await Promise.all([
     supabase.from("posts").select("id, estado", { count: "exact" }),
     supabase.from("contact_messages").select("id", { count: "exact", head: true }).eq("leido", false),

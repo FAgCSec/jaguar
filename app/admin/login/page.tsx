@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LoginForm } from "./LoginForm";
 
+// Pagina de ingreso al admin. Solo muestra el formulario centrado.
 export const metadata: Metadata = { title: "Acceso admin" };
 
 export default function LoginPage() {

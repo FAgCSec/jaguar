@@ -8,6 +8,7 @@ import { limpiarHtml } from "@/lib/sanitize";
 import { SITE } from "@/lib/constants";
 import { fechaCorta } from "@/lib/utils";
 
+// Detalle de una columna (/columnas/xxxx). Muestra quien la escribe y el texto completo.
 export const revalidate = 60;
 
 export async function generateMetadata({

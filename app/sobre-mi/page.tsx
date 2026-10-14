@@ -4,6 +4,8 @@ import { SITE } from "@/lib/constants";
 import { getConfig } from "@/lib/data";
 import { limpiarHtml } from "@/lib/sanitize";
 
+// Pagina con la historia del candidato. La foto y el texto se editan en el admin.
+// Si no hay foto, sale un cuadro verde con la inicial para no dejar vacio.
 export const metadata: Metadata = { title: "Sobre mí" };
 export const revalidate = 60;
 

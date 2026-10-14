@@ -4,6 +4,8 @@ import { useActionState } from "react";
 import { Sprout } from "lucide-react";
 import { loginAdmin } from "./actions";
 
+// Formulario de entrada al panel. Pide correo y clave y llama a loginAdmin.
+// Muestra si esta verificando y si hubo error.
 export function LoginForm() {
   const [state, action, pending] = useActionState(loginAdmin, undefined);
   return (

@@ -6,6 +6,8 @@ import { eliminarPost } from "../posts-actions";
 import type { Post } from "@/types";
 import { fechaCorta } from "@/lib/utils";
 
+// Lista de noticias en el admin con filtros por estado (todas, publicadas, borradores).
+// Cada fila deja editar o borrar. El borrar pide confirmacion.
 export const metadata: Metadata = { title: "Admin noticias" };
 
 export default async function AdminNoticias({

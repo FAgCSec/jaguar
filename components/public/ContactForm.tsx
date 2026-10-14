@@ -4,10 +4,13 @@ import { useState } from "react";
 import { CircleAlert, CircleCheck, Hand } from "lucide-react";
 import { enviarMensaje } from "@/app/contacto/actions";
 
+// Formulario de voluntarios. Pide nombre, whatsapp, correo, municipio y mensaje.
+// Al enviar llama a la accion enviarMensaje que lo guarda en la base. Muestra aviso de ok o error.
 export function ContactForm() {
   const [estado, setEstado] = useState<"idle" | "ok" | "error">("idle");
   const [cargando, setCargando] = useState(false);
 
+  // Al enviar: evita que la pagina se recargue, manda los datos y muestra si quedo o fallo
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setCargando(true);
@@ -85,7 +88,7 @@ export function ContactForm() {
           className="rounded-xl bg-[#F5F5ED] px-4 py-2.5 font-normal ring-1 ring-[#2E7D32]/15 outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
       </label>
-      {/* Honeypot anti-spam simple (además de Turnstile/hCaptcha opcional) */}
+      {/* Campo trampa contra robots: los humanos no lo ven ni lo llenan, los bots si. Asi se detecta spam. */}
       <input type="text" name="empresa" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
         <p className="text-xs text-[#1A1A1A]/60">

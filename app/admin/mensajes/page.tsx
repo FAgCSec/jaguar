@@ -3,6 +3,8 @@ import { eliminarMensaje, marcarLeido } from "../gestion-actions";
 import { Inbox, Mail, MapPin, MessageCircle, Phone, Trash2 } from "lucide-react";
 import type { ContactMessage } from "@/types";
 
+// Bandeja de mensajes y voluntarios. Se puede filtrar por sin leer.
+// Los nuevos salen resaltados. Deja responder por WhatsApp, marcar leido y borrar.
 export default async function AdminMensajes({
   searchParams,
 }: {
