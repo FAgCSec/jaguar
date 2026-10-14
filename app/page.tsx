@@ -13,6 +13,7 @@ import { SITE } from "@/lib/constants";
 import {
   getConfig,
   getGaleria,
+  getLoMejorDeLaSemana,
   getPosts,
   getPropuestas,
   getStats,
@@ -27,13 +28,14 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function Home() {
-  const [config, stats, noticias, columnas, galeria, testimonios, propuestas] =
+  const [config, stats, noticias, columnas, galeria, semana, testimonios, propuestas] =
     await Promise.all([
       getConfig(),
       getStats(),
       getPosts("noticia", 6),
       getPosts("columna", 3),
       getGaleria(7),
+      getLoMejorDeLaSemana(3),
       getTestimonios(),
       getPropuestas(),
     ]);
@@ -63,10 +65,18 @@ export default async function Home() {
         </div>
         <DivisorHojas />
         {noticias.length ? (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {noticias.map((n) => (
-              <NewsCard key={n.id} post={n} />
-            ))}
+          <div className="marquee overflow-hidden">
+            <div className="marquee-track flex gap-5">
+              {[...noticias, ...noticias].map((n, i) => (
+                <div
+                  key={`${n.id}-${i}`}
+                  aria-hidden={i >= noticias.length}
+                  className="w-80 shrink-0 sm:w-96"
+                >
+                  <NewsCard post={n} />
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <p className="rounded-2xl bg-white p-8 text-center shadow">
@@ -131,6 +141,26 @@ export default async function Home() {
           <GalleryGrid imagenes={galeria} />
         </div>
       </section>
+
+      {/* Lo mejor de la semana */}
+      {semana.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="semana-h">
+          <div>
+            <h2 id="semana-h" className="text-2xl font-extrabold text-[#1B5E20] sm:text-3xl">
+              Lo mejor de la semana
+            </h2>
+            <p className="mt-1 text-sm text-[#1A1A1A]/70">
+              Lo más reciente de la campaña.
+            </p>
+          </div>
+          <DivisorHojas />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {semana.map((s) => (
+              <NewsCard key={s.id} post={s} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Testimonios */}
       <section className="mx-auto max-w-6xl px-4 py-12" aria-labelledby="test-h">

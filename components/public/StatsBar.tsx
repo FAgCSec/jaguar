@@ -1,4 +1,4 @@
-import { FileText, Leaf, Map, Sprout, Users, type LucideIcon } from "lucide-react";
+import { Camera, FileText, Leaf, Map, Sprout, Users, type LucideIcon } from "lucide-react";
 import type { Stat } from "@/types";
 
 const ICONOS: Record<string, LucideIcon> = {
@@ -6,6 +6,7 @@ const ICONOS: Record<string, LucideIcon> = {
   doc: FileText,
   users: Users,
   leaf: Leaf,
+  camera: Camera,
 };
 
 export function StatsBar({ stats }: { stats: Stat[] }) {

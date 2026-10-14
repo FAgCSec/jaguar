@@ -18,7 +18,7 @@ export default async function PropuestasPage() {
       </p>
       <div className="mt-6">
         {grupos.length ? (
-          <ProposalSection grupos={grupos} pdfUrl={pdfUrl} />
+          <ProposalSection grupos={grupos} pdfUrl={pdfUrl} abiertos />
         ) : (
           <p className="flex items-center justify-center gap-2 rounded-2xl bg-white p-8 text-center shadow">
             <FileText size={20} className="shrink-0 text-[#2E7D32]" />

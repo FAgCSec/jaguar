@@ -1,68 +1,53 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import type { Testimonial } from "@/types";
 
+/**
+ * Testimonios en cinta que se desplaza sola (bucle infinito).
+ * Se pausa al pasar el mouse y respeta "reducir movimiento" del sistema.
+ */
 export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
-  const [indice, setIndice] = useState(0);
   if (!items.length) return null;
-  const actual = items[indice % items.length];
+  const doble = [...items, ...items];
 
   return (
-    <div className="mx-auto max-w-3xl rounded-3xl bg-[#1B5E20] p-6 text-white shadow-xl sm:p-10">
-      <Quote aria-hidden="true" size={36} className="text-[#C6D92E]" />
-      <blockquote key={actual.id} className="min-h-24 text-lg italic leading-relaxed sm:text-xl">
-        {actual.texto}
-      </blockquote>
-      <div className="mt-5 flex items-center gap-3">
-        {actual.foto_url ? (
-          <Image
-            src={actual.foto_url}
-            alt={`Foto de ${actual.nombre}`}
-            width={52}
-            height={52}
-            loading="lazy"
-            className="h-13 w-13 rounded-full object-cover ring-2 ring-[#C6D92E]"
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="flex h-13 w-13 items-center justify-center rounded-full bg-[#C6D92E] p-3 text-xl font-extrabold text-[#1B5E20]"
+    <div className="marquee overflow-hidden" aria-label="Testimonios de la comunidad">
+      <div className="marquee-track flex gap-4">
+        {doble.map((t, i) => (
+          <figure
+            key={`${t.id}-${i}`}
+            aria-hidden={i >= items.length}
+            className="flex w-72 shrink-0 items-start gap-3 rounded-2xl bg-white p-4 shadow-md ring-1 ring-[#2E7D32]/10"
           >
-            {actual.nombre.charAt(0)}
-          </span>
-        )}
-        <div>
-          <p className="font-bold">{actual.nombre}</p>
-          {actual.municipio && (
-            <p className="text-sm text-[#D4E157]">{actual.municipio}</p>
-          )}
-        </div>
-      </div>
-      <div className="mt-6 flex items-center justify-between">
-        <p className="text-sm text-white/70" aria-live="polite">
-          {indice + 1} de {items.length}
-        </p>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => setIndice((i) => (i - 1 + items.length) % items.length)}
-            aria-label="Testimonio anterior"
-            className="rounded-full bg-white/10 p-2.5 hover:bg-[#C6D92E] hover:text-[#1B5E20]"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setIndice((i) => (i + 1) % items.length)}
-            aria-label="Testimonio siguiente"
-            className="rounded-full bg-white/10 p-2.5 hover:bg-[#C6D92E] hover:text-[#1B5E20]"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
+            {t.foto_url ? (
+              <Image
+                src={t.foto_url}
+                alt=""
+                width={44}
+                height={44}
+                loading="lazy"
+                className="h-11 w-11 shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <span
+                aria-hidden="true"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#C6D92E] text-lg font-extrabold text-[#1B5E20]"
+              >
+                {t.nombre.charAt(0)}
+              </span>
+            )}
+            <div className="min-w-0">
+              <blockquote className="text-sm leading-snug text-[#1A1A1A]/85">
+                {t.texto}
+              </blockquote>
+              <figcaption className="mt-2 text-xs font-bold text-[#1B5E20]">
+                {t.nombre}
+                {t.municipio && (
+                  <span className="font-semibold text-[#1A1A1A]/55"> · {t.municipio}</span>
+                )}
+              </figcaption>
+            </div>
+          </figure>
+        ))}
       </div>
     </div>
   );
